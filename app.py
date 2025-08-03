@@ -65,7 +65,7 @@ load_dotenv()
 @st.cache_data(ttl=1800)
 def get_weather_data(city="Manaus"):
     try:
-        api_key = os.getenv("weather_api_key")
+        api_key = st.secret["weather_api_key"]
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
         response = requests.get(url)
         return response.json()
@@ -97,5 +97,6 @@ values = [100 + i + 10 * np.sin(i / 3) for i in range(30)]
 fig = go.Figure()
 fig.add_trace(go.Scatter(x=dates, y=values, mode='lines', name='Exemplo'))
 fig.update_layout(title="Evolução ao Longo do Tempo")
+
 
 st.plotly_chart(fig, use_container_width=True)

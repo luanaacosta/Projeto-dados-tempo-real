@@ -59,8 +59,6 @@ else:
     st.error("Erro ao carregar dados das criptomoedas.")
 
 import os
-from dotenv import load_dotenv
-load_dotenv()
 
 @st.cache_data(ttl=1800)
 def get_weather_data(city="Manaus"):
@@ -100,4 +98,5 @@ fig.update_layout(title="Evolução ao Longo do Tempo")
 
 
 st.plotly_chart(fig, use_container_width=True)
+
 

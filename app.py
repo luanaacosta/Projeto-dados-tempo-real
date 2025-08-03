@@ -59,11 +59,13 @@ else:
     st.error("Erro ao carregar dados das criptomoedas.")
 
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 @st.cache_data(ttl=1800)
 def get_weather_data(city="Manaus"):
     try:
-        api_key = st.secrets["weather_api_key"]
+        api_key = os.getenv("weather_api_key")
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
         response = requests.get(url)
         return response.json()
@@ -98,5 +100,6 @@ fig.update_layout(title="Evolução ao Longo do Tempo")
 
 
 st.plotly_chart(fig, use_container_width=True)
+
 
 
